@@ -28,7 +28,7 @@ public class ElementGrower : MonoBehaviour
 			_image.color = new Color32(255, 255, 255, 0);
 		}
 		_rectTransform.DOKill();
-		_rectTransform.localScale = Vector2.one*0.7f;
+		_rectTransform.localScale = Vector2.one * 0.7f;
 	}
 
 	public void Open()
