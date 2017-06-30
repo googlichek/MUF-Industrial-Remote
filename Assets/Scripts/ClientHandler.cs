@@ -13,10 +13,15 @@ public class ClientHandler : MonoBehaviour
 
 	private bool _connecting = false;
 	private bool _isServer;
+
 	private NetworkPlayer _myNetworkPlayer;
+	private RemoteHandler _remoteHandler;
+
 
 	void Start()
 	{
+		_remoteHandler = GameObject.Find("Remote Handler").GetComponent<RemoteHandler>();
+
 		try
 		{
 			List<IPAddress> addresses = GetIpAddresses();
@@ -112,21 +117,17 @@ public class ClientHandler : MonoBehaviour
 	}
 
 	[RPC]
-	public void LaunchVideo01()
+	public void OpenMap()
 	{
-		GetComponent<NetworkView>().RPC("LaunchVideo01", RPCMode.Server);
+		_remoteHandler.OpenMap();
+		GetComponent<NetworkView>().RPC("OpenMap", RPCMode.Server);
 	}
 
 	[RPC]
-	public void LaunchVideo02()
+	public void BackToMenu()
 	{
-		GetComponent<NetworkView>().RPC("LaunchVideo02", RPCMode.Server);
-	}
-
-	[RPC]
-	public void LaunchVideo03()
-	{
-		GetComponent<NetworkView>().RPC("LaunchVideo03", RPCMode.Server);
+		_remoteHandler.BackToMenu();
+		GetComponent<NetworkView>().RPC("BackToMenu", RPCMode.Server);
 	}
 
 	[RPC]

@@ -6,32 +6,16 @@ using UnityEngine.Video;
 
 public class ApplicationHandler : MonoBehaviour
 {
-	public RawImage RawImage01;
-	public RawImage RawImage02;
-	public RawImage RawImage03;
-
-	public VideoPlayer Video01;
-	public VideoPlayer Video02;
-	public VideoPlayer Video03;
-
 	public float Timeout = 1f;
 
 	[RPC]
-	public void LaunchVideo01()
+	public void OpenMap()
 	{
-		SwitchVideo(Video01, Video02, Video03, RawImage01, RawImage02, RawImage03);
 	}
 
 	[RPC]
-	public void LaunchVideo02()
+	public void BackToMenu()
 	{
-		SwitchVideo(Video02, Video01, Video03, RawImage02, RawImage01, RawImage03);
-	}
-
-	[RPC]
-	public void LaunchVideo03()
-	{
-		SwitchVideo(Video03, Video01, Video02, RawImage03, RawImage01, RawImage02);
 	}
 
 	private void SwitchVideo(

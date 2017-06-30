@@ -60,21 +60,13 @@ public class ServerHandler : MonoBehaviour
 	}
 
 	[RPC]
-	void LaunchVideo01()
+	void OpenMap()
 	{
-		_appHandler.LaunchVideo01();
 	}
 
 	[RPC]
-	void LaunchVideo02()
+	void BackToMenu()
 	{
-		_appHandler.LaunchVideo02();
-	}
-
-	[RPC]
-	void LaunchVideo03()
-	{
-		_appHandler.LaunchVideo03();
 	}
 
 	[RPC]

@@ -781,7 +781,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1828359640}
+      - m_Target: {fileID: 1828359638}
         m_MethodName: OpenMap
         m_Mode: 1
         m_Arguments:
@@ -1342,7 +1342,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1828359640}
+      - m_Target: {fileID: 1828359638}
         m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
@@ -2035,6 +2035,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1828359639}
+  - component: {fileID: 1828359641}
   - component: {fileID: 1828359638}
   - component: {fileID: 1828359640}
   m_Layer: 0
@@ -2109,6 +2110,18 @@ MonoBehaviour:
   BackToMenuButtonEndPositionY: -400
   Timeout: 1.2
   BaseDelay: 0.2
+--- !u!148 &1828359641
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1828359637}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 1828359639}
+  m_ViewID:
+    m_ID: 1
+    m_Type: 1
 --- !u!1 &1941424287
 GameObject:
   m_ObjectHideFlags: 0
