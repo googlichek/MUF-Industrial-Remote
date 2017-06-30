@@ -67,7 +67,7 @@ public class RemoteHandler : MonoBehaviour
 			MapButtonEndPositionX,
 			ButtonsEndPositionY,
 			Timeout,
-			1.5f * Timeout,
+			2f * Timeout,
 			Ease.OutBack);
 	}
 
