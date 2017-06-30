@@ -28,10 +28,7 @@ public class NumberGrower : MonoBehaviour
 		}
 
 
-		if (IsFloat)
-			_txt.text = (Mathf.Lerp(0, To, _lerp)).ToString("0.0");
-		else
-			_txt.text = ((int) Mathf.Lerp(0, To, _lerp)).ToString();
+		_txt.text = IsFloat ? (Mathf.Lerp(0, To, _lerp)).ToString("0.0") : ((int) Mathf.Lerp(0, To, _lerp)).ToString();
 
 		if (IsPersent)
 		{
