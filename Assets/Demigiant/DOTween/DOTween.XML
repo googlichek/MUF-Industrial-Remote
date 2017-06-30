@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <doc>
     <assembly>
         <name>DOTween</name>
@@ -664,14 +664,14 @@
         </member>
         <member name="M:DG.Tweening.DOTween.Restart(System.Object,System.Boolean,System.Single)">
             <summary>Restarts all tweens with the given ID or target, then returns the number of actual tweens restarted</summary>
-            <param name="includeDelay">If TRUE includes the eventual tweens delays, otherwise skips them</param>
-            <param name="changeDelayTo">If >= 0 changes the startup delay of all involved tweens to this value, otherwise doesn't touch it</param>
+            <param name="includeTimeout">If TRUE includes the eventual tweens delays, otherwise skips them</param>
+            <param name="changeTimeoutTo">If >= 0 changes the startup delay of all involved tweens to this value, otherwise doesn't touch it</param>
         </member>
         <member name="M:DG.Tweening.DOTween.Restart(System.Object,System.Object,System.Boolean,System.Single)">
             <summary>Restarts all tweens with the given target and the given ID, and returns the number of actual tweens played
             (meaning the tweens that were not already playing or complete)</summary>
-            <param name="includeDelay">If TRUE includes the eventual tweens delays, otherwise skips them</param>
-            <param name="changeDelayTo">If >= 0 changes the startup delay of all involved tweens to this value, otherwise doesn't touch it</param>
+            <param name="includeTimeout">If TRUE includes the eventual tweens delays, otherwise skips them</param>
+            <param name="changeTimeoutTo">If >= 0 changes the startup delay of all involved tweens to this value, otherwise doesn't touch it</param>
         </member>
         <member name="M:DG.Tweening.DOTween.RewindAll(System.Boolean)">
             <summary>Rewinds and pauses all tweens, then returns the number of actual tweens rewinded
@@ -799,7 +799,7 @@
             <param name="lifetimePercentage">The time percentage (0 to 1) at which the value should be taken</param>
             <param name="easeCurve">The AnimationCurve to use for ease</param>
         </member>
-        <member name="M:DG.Tweening.DOVirtual.DelayedCall(System.Single,DG.Tweening.TweenCallback,System.Boolean)">
+        <member name="M:DG.Tweening.DOVirtual.TimeoutedCall(System.Single,DG.Tweening.TweenCallback,System.Boolean)">
             <summary>Fires the given callback after the given time.</summary>
             <param name="delay">Callback delay</param>
             <param name="callback">Callback to fire when the delay has expired</param>
@@ -1026,12 +1026,12 @@
         </member>
         <member name="M:DG.Tweening.TweenExtensions.Restart(DG.Tweening.Tween,System.Boolean,System.Single)">
             <summary>Restarts the tween from the beginning</summary>
-            <param name="includeDelay">If TRUE includes the eventual tween delay, otherwise skips it</param>
-            <param name="changeDelayTo">If >= 0 changes the startup delay to this value, otherwise doesn't touch it</param>
+            <param name="includeTimeout">If TRUE includes the eventual tween delay, otherwise skips it</param>
+            <param name="changeTimeoutTo">If >= 0 changes the startup delay to this value, otherwise doesn't touch it</param>
         </member>
         <member name="M:DG.Tweening.TweenExtensions.Rewind(DG.Tweening.Tween,System.Boolean)">
             <summary>Rewinds and pauses the tween</summary>
-            <param name="includeDelay">If TRUE includes the eventual tween delay, otherwise skips it</param>
+            <param name="includeTimeout">If TRUE includes the eventual tween delay, otherwise skips it</param>
         </member>
         <member name="M:DG.Tweening.TweenExtensions.SmoothRewind(DG.Tweening.Tween)">
             <summary>Smoothly rewinds the tween (delays excluded).
@@ -1101,7 +1101,7 @@
         <member name="M:DG.Tweening.TweenExtensions.CompletedLoops(DG.Tweening.Tween)">
             <summary>Returns the total number of loops completed by this tween</summary>
         </member>
-        <member name="M:DG.Tweening.TweenExtensions.Delay(DG.Tweening.Tween)">
+        <member name="M:DG.Tweening.TweenExtensions.Timeout(DG.Tweening.Tween)">
             <summary>Returns the eventual delay set for this tween</summary>
         </member>
         <member name="M:DG.Tweening.TweenExtensions.Duration(DG.Tweening.Tween,System.Boolean)">
@@ -2052,7 +2052,7 @@
             <summary>Sets the onWaypointChange callback for the tween.
             Called when a path tween reaches a new waypoint</summary>
         </member>
-        <member name="M:DG.Tweening.TweenParams.SetDelay(System.Single)">
+        <member name="M:DG.Tweening.TweenParams.SetTimeout(System.Single)">
             <summary>Sets a delayed startup for the tween.
             <para>Has no effect on Sequences or if the tween has already started</para></summary>
         </member>
@@ -2265,7 +2265,7 @@
             then immediately sends the target to the previously set endValue.</summary>
             <param name="isRelative">If TRUE the FROM value will be calculated as relative to the current one</param>
         </member>
-        <member name="M:DG.Tweening.TweenSettingsExtensions.SetDelay``1(``0,System.Single)">
+        <member name="M:DG.Tweening.TweenSettingsExtensions.SetTimeout``1(``0,System.Single)">
             <summary>Sets a delayed startup for the tween.
             <para>Has no effect on Sequences or if the tween has already started</para></summary>
         </member>
