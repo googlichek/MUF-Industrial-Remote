@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 48e7fa2804b71684a9a9a91fa26f6bcd
+timeCreated: 1498570327
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Institut
+  fontNames:
+  - Institut
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

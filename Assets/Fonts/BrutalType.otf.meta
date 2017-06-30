@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 035b3e87342e5f74b950b459eb329c6d
+timeCreated: 1498570548
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Brutal Type
+  fontNames:
+  - Brutal Type
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
