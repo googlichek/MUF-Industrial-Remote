@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,21 +7,37 @@ using UnityEngine.Video;
 
 public class ApplicationHandler : MonoBehaviour
 {
+	public Transform MainCamera;
+
+	public List<Image> MenuImages;
+	public List<Transform> CameraPositions;
+
 	public float Timeout = 1f;
+
+	void Start()
+	{
+		BackToMenu();
+	}
 
 	[RPC]
 	public void OpenMap()
 	{
+		TweenMenuImages(1, 1, 1);
+		MoveCamera(0, Timeout * 2);
 	}
 
 	[RPC]
 	public void BackToMenu()
 	{
+		TweenMenuImages(0, 0.7f, 1);
+		MoveCamera(0, Timeout * 2);
 	}
 
 	[RPC]
 	public void MoveToPointOnMap(int index)
 	{
+		MoveCamera(index, Timeout * 2);
+		MoveCamera(0, 1, 2.1f);
 	}
 
 	[RPC]
@@ -28,35 +45,41 @@ public class ApplicationHandler : MonoBehaviour
 	{
 	}
 
-	private void SwitchVideo(
-		VideoPlayer video01,
-		VideoPlayer video02,
-		VideoPlayer video03,
-		RawImage image01,
-		RawImage image02,
-		RawImage image03)
+	private void MoveCamera(int index, float time, float delay = 0f)
 	{
-		image01.DOKill();
-		image02.DOKill();
-		image03.DOKill();
+		if (delay <= 0)
+		{
+			MainCamera.DOKill();
+		}
 
-		image03.DOFade(0, Timeout).SetEase(Ease.OutQuint);
-		image02.DOFade(0, Timeout).SetEase(Ease.OutQuint);
-		image01.DOFade(1, Timeout).SetEase(Ease.InQuint);
-
-		video01.Play();
-
-		StartCoroutine(DelayRewind(video02, video03));
+		MainCamera.transform.DOMove(CameraPositions[index].transform.position, time).SetEase(Ease.InOutQuad).SetDelay(delay);
 	}
 
-	private IEnumerator DelayRewind(VideoPlayer video01, VideoPlayer video02)
+	private void TweenMenuImages(float value, float notFullScale, float time)
 	{
-		yield return new WaitForSeconds(Timeout);
+		int i = 0;
+		foreach (Image image in MenuImages)
+		{
+			image.DOKill();
 
-		video01.Stop();
-		video01.frame = 0;
 
-		video02.Stop();
-		video02.frame = 0;
+			if (image.tag == "MenuImage")
+			{
+				image.DOFade(value, time).SetDelay(0.1f * i);
+				image.transform.DOScale(notFullScale, time).SetDelay(0.1f * i);
+			}
+			else if (image.tag == "MenuFillImage")
+			{
+				image.DOFade(value, time).SetDelay(0.1f * i);
+				image.DOFillAmount(value, time).SetDelay(0.1f * i);
+			}
+			else
+			{
+				image.DOFade(value, time).SetDelay(0.1f * i);
+				image.transform.DOScale(notFullScale, time).SetDelay(0.1f * i);
+			}
+
+			i++;
+		}
 	}
 }

@@ -62,11 +62,13 @@ public class ServerHandler : MonoBehaviour
 	[RPC]
 	void OpenMap()
 	{
+		_appHandler.OpenMap();
 	}
 
 	[RPC]
 	void BackToMenu()
 	{
+		_appHandler.BackToMenu();
 	}
 
 	[RPC]
