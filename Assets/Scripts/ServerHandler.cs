@@ -70,6 +70,18 @@ public class ServerHandler : MonoBehaviour
 	}
 
 	[RPC]
+	void MoveToPointOnMap(int index)
+	{
+		_appHandler.MoveToPointOnMap(index);
+	}
+
+	[RPC]
+	void OpenSlide(int index)
+	{
+		_appHandler.OpenSlide(index);
+	}
+
+	[RPC]
 	void ReceiveInfoFromClient(string someInfo)
 	{
 		Debug.Log(someInfo + "\n");

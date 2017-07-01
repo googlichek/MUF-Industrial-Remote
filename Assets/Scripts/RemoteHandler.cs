@@ -74,6 +74,16 @@ public class RemoteHandler : MonoBehaviour
 			Ease.OutBack);
 	}
 
+	[RPC]
+	public void MoveToPointOnMap(int index)
+	{
+	}
+
+	[RPC]
+	public void OpenSlide(int index)
+	{
+	}
+
 	private void TweenMenuElements(
 		float mapButtonPositionX,
 		float buttonsPositionY,

@@ -18,6 +18,16 @@ public class ApplicationHandler : MonoBehaviour
 	{
 	}
 
+	[RPC]
+	public void MoveToPointOnMap(int index)
+	{
+	}
+
+	[RPC]
+	public void OpenSlide(int index)
+	{
+	}
+
 	private void SwitchVideo(
 		VideoPlayer video01,
 		VideoPlayer video02,

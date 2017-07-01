@@ -131,6 +131,20 @@ public class ClientHandler : MonoBehaviour
 	}
 
 	[RPC]
+	public void MoveToPointOnMap(int index)
+	{
+		_remoteHandler.MoveToPointOnMap(index);
+		GetComponent<NetworkView>().RPC("MoveToPointOnMap", RPCMode.Server, index);
+	}
+
+	[RPC]
+	public void OpenSlide(int index)
+	{
+		_remoteHandler.OpenSlide(index);
+		GetComponent<NetworkView>().RPC("OpenSlide", RPCMode.Server, index);
+	}
+
+	[RPC]
 	void SendInfoToServer()
 	{
 		string someInfo = "Client " + _myNetworkPlayer.guid + ": connected to server";
