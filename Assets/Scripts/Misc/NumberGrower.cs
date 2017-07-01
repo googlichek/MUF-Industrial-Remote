@@ -10,7 +10,6 @@ public class NumberGrower : MonoBehaviour
 
 	private Text _txt;
 
-	private int _intern = 0;
 	private float _lerp = 0;
 
 	private bool _animate;

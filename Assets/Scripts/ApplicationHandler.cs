@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class ApplicationHandler : MonoBehaviour
 {
@@ -10,7 +12,14 @@ public class ApplicationHandler : MonoBehaviour
 	public List<Image> MenuImages;
 	public List<Transform> CameraPositions;
 
+	public List<Image> Slide01Images;
+	public RawImage Slide01VideoImage;
+	public VideoPlayer Slide01VideoPlayer;
+	public List<NumberGrower> Slide01Numbers;
+
 	public float Timeout = 1f;
+
+	private int _currentSlideIndex = 0;
 
 	void Start()
 	{
@@ -20,6 +29,7 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void OpenMap()
 	{
+		CloseSlide();
 		TweenMenuImages(1, 1, 1);
 		MoveCamera(0, Timeout * 2);
 	}
@@ -41,6 +51,101 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void OpenSlide(int index)
 	{
+		if (_currentSlideIndex == index)
+		{
+			return;
+		}
+
+		if (index == 1)
+		{
+			_currentSlideIndex = 1;
+
+			TweenSlide(
+				Slide01Images,
+				Slide01VideoImage,
+				Slide01VideoPlayer,
+				Slide01Numbers,
+				1,
+				Timeout * 2,
+				Ease.OutQuint);
+		}
+		else
+		{
+			_currentSlideIndex = 0;
+		}
+	}
+
+	private void CloseSlide()
+	{
+		if (_currentSlideIndex == 0)
+		{
+			return;
+		}
+
+		if (_currentSlideIndex == 1)
+		{
+			TweenSlide(
+				Slide01Images,
+				Slide01VideoImage,
+				Slide01VideoPlayer,
+				Slide01Numbers,
+				0,
+				Timeout,
+				Ease.InQuint);
+
+			_currentSlideIndex = 0;
+		}
+	}
+
+	private void TweenSlide(
+		List<Image> slideImages,
+		RawImage slideVideo,
+		VideoPlayer videoPlayer,
+		List<NumberGrower> numbers,
+		float value,
+		float time,
+		Ease ease)
+	{
+		int i = 0;
+
+		foreach (Image image in slideImages)
+		{
+			image.DOKill();
+			image.DOFade(value, time).SetEase(ease).SetDelay(0.1f * i);
+			i++;
+		}
+
+		slideVideo.DOKill();
+		slideVideo.DOFade(value, time).SetEase(ease).SetDelay(0.1f * i);
+		i++;
+
+		if (value > 0)
+		{
+			videoPlayer.frame = 0;
+			videoPlayer.Play();
+		}
+		else
+		{
+			StartCoroutine(DelayVideoRewind(videoPlayer));
+		}
+
+		foreach (NumberGrower number in numbers)
+		{
+			number.DOKill();
+
+			if (value > 0)
+			{
+				number.Reset();
+				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(0.1f * i);
+				number.Animate();
+			}
+			else
+			{
+				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(0.05f * i);
+			}
+			
+			i++;
+		}
 	}
 
 	private void MoveCamera(int index, float time, float delay = 0f)
@@ -61,12 +166,12 @@ public class ApplicationHandler : MonoBehaviour
 			image.DOKill();
 
 
-			if (image.tag == "MenuImage")
+			if (image.CompareTag("MenuImage"))
 			{
 				image.DOFade(value, time).SetDelay(0.1f * i);
 				image.transform.DOScale(notFullScale, time).SetDelay(0.1f * i);
 			}
-			else if (image.tag == "MenuFillImage")
+			else if (image.CompareTag("MenuFillImage"))
 			{
 				image.DOFade(value, time).SetDelay(0.1f * i);
 				image.DOFillAmount(value, time).SetDelay(0.1f * i);
@@ -79,5 +184,12 @@ public class ApplicationHandler : MonoBehaviour
 
 			i++;
 		}
+	}
+
+	private IEnumerator DelayVideoRewind(VideoPlayer videoPlayer)
+	{
+		yield return new WaitForSeconds(Timeout * 2);
+		videoPlayer.frame = 0;
+		videoPlayer.Stop();
 	}
 }
