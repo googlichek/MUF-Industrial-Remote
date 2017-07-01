@@ -67,7 +67,7 @@ public class ApplicationHandler : MonoBehaviour
 				Slide01Numbers,
 				1,
 				Timeout * 2,
-				Ease.OutQuint);
+				Ease.InQuint);
 		}
 		else
 		{
@@ -90,8 +90,8 @@ public class ApplicationHandler : MonoBehaviour
 				Slide01VideoPlayer,
 				Slide01Numbers,
 				0,
-				Timeout,
-				Ease.InQuint);
+				Timeout * 2,
+				Ease.OutQuint);
 
 			_currentSlideIndex = 0;
 		}
