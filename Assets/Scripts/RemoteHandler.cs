@@ -13,6 +13,9 @@ public class RemoteHandler : MonoBehaviour
 	public List<Button> TopRowInvestButtons;
 	public List<Button> BottomRowInvestButtons;
 
+	public List<Image> MenuImages; 
+	public List<Image> InvestImages; 
+
 	public float MapButtonStartPositionX;
 	public float MapButtonEndPositionX;
 
@@ -27,7 +30,7 @@ public class RemoteHandler : MonoBehaviour
 
 	void Start()
 	{
-		TweenMenuButtons(
+		TweenMenuElements(
 			MapButtonEndPositionX,
 			ButtonsEndPositionY,
 			Timeout,
@@ -38,14 +41,14 @@ public class RemoteHandler : MonoBehaviour
 	[RPC]
 	public void OpenMap()
 	{
-		TweenMenuButtons(
+		TweenMenuElements(
 			MapButtonStartPositionX,
 			ButtonsStartPositionY,
 			Timeout,
 			0f,
 			Ease.InBack);
 
-		TweenInvestProjectButtons(
+		TweenInvestProjectElements(
 			BackToMenuButtonEndPositionY,
 			ButtonsEndPositionY,
 			Timeout,
@@ -56,14 +59,14 @@ public class RemoteHandler : MonoBehaviour
 	[RPC]
 	public void BackToMenu()
 	{
-		TweenInvestProjectButtons(
+		TweenInvestProjectElements(
 			BackToMenuButtonStartPositionY,
 			ButtonsStartPositionY,
 			Timeout,
 			0f,
 			Ease.InBack);
 
-		TweenMenuButtons(
+		TweenMenuElements(
 			MapButtonEndPositionX,
 			ButtonsEndPositionY,
 			Timeout,
@@ -71,7 +74,7 @@ public class RemoteHandler : MonoBehaviour
 			Ease.OutBack);
 	}
 
-	private void TweenMenuButtons(
+	private void TweenMenuElements(
 		float mapButtonPositionX,
 		float buttonsPositionY,
 		float time,
@@ -80,6 +83,8 @@ public class RemoteHandler : MonoBehaviour
 	{
 		int i = 1;
 
+		i = TweenListOfImages(InvestImages, 0, time, 0, ease == Ease.InBack ? Ease.OutBack : Ease.InBack, i);
+
 		if (Mathf.FloorToInt(delay) == 0)
 		{
 			MapButton.DOKill();
@@ -97,9 +102,11 @@ public class RemoteHandler : MonoBehaviour
 			MapButton.DOKill();
 			MapButton.transform.DOLocalMoveX(mapButtonPositionX, time).SetEase(ease).SetDelay(delay + BaseDelay * i);
 		}
+
+		TweenListOfImages(MenuImages, 1, time, delay, ease, i);
 	}
 
-	private void TweenInvestProjectButtons(
+	private void TweenInvestProjectElements(
 		float backButtonPositionY,
 		float buttonsPositionY,
 		float time,
@@ -108,6 +115,8 @@ public class RemoteHandler : MonoBehaviour
 	{
 		int i = 1;
 
+		i = TweenListOfImages(MenuImages, 0, time, 0, ease == Ease.InBack ? Ease.OutBack : Ease.InBack, i);
+
 		if (Mathf.FloorToInt(delay) == 0)
 		{
 			BackToMenuButton.DOKill();
@@ -127,6 +136,20 @@ public class RemoteHandler : MonoBehaviour
 			BackToMenuButton.transform.DOLocalMoveY(
 				backButtonPositionY, time).SetEase(ease).SetDelay(delay + BaseDelay * i);
 		}
+
+		TweenListOfImages(InvestImages, 1, time, delay, ease, i);
+	}
+
+	private int TweenListOfImages(List<Image> images, float value, float time, float delay, Ease ease, int i)
+	{
+		foreach (Image image in images)
+		{
+			image.DOKill();
+			image.DOFade(value, time).SetEase(ease).SetDelay(delay + BaseDelay * i);
+			i++;
+		}
+
+		return i;
 	}
 
 	private int TweenListOfButtons(
