@@ -106,15 +106,18 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void MoveToPointOnMap(int index)
 	{
-		_mapSlideIsOpened = true;
-
 		if (_currentMapSlideIndex == index)
 		{
 			return;
 		}
 
 		CloseMapSlide();
-		StartCoroutine(MoveCameraAndOpenMapSlide(index));
+
+		StartCoroutine(
+			!_mapSlideIsOpened ? MoveCameraAndOpenMapSlide(index, -2 * Timeout) : MoveCameraAndOpenMapSlide(index));
+
+
+		_mapSlideIsOpened = true;
 	}
 
 	[RPC]
@@ -486,9 +489,9 @@ public class ApplicationHandler : MonoBehaviour
 		}
 	}
 
-	private IEnumerator MoveCameraAndOpenMapSlide(int index)
+	private IEnumerator MoveCameraAndOpenMapSlide(int index, float time = 0)
 	{
-		yield return new WaitForSeconds(Timeout * 2 + 0.1f);
+		yield return new WaitForSeconds(time + Timeout * 2 + 0.1f);
 		TweenMenuImages(0, 0.7f, 0, Timeout * 2 + 0.1f, 0);
 		MoveCamera(index, Timeout * 2 + 0.1f);
 		MoveCamera(0, 1, Timeout * 2 + 0.1f);
