@@ -677,7 +677,7 @@ MonoBehaviour:
   IsFloat: 1
   IsPersent: 0
   StarSymbol: 0
-  DoubleStarSymbol: 0
+  DoubleStarSymbol: 1
 --- !u!114 &96031720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9485,7 +9485,7 @@ MonoBehaviour:
   To: 241.1
   IsFloat: 1
   IsPersent: 0
-  StarSymbol: 0
+  StarSymbol: 1
   DoubleStarSymbol: 0
 --- !u!114 &1665930149
 MonoBehaviour:
