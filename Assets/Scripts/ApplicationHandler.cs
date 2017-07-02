@@ -45,16 +45,36 @@ public class ApplicationHandler : MonoBehaviour
 	public List<Image> MapSlide01Images;
 	public List<NumberGrower> MapSlide01Numbers;
 
+	public List<Image> MapSlide02Images;
+	public List<NumberGrower> MapSlide02Numbers;
+
+	public List<Image> MapSlide03Images;
+	public List<NumberGrower> MapSlide03Numbers;
+
+	public List<Image> MapSlide04Images;
+	public List<NumberGrower> MapSlide04Numbers;
+
+	public List<Image> MapSlide05Images;
+	public List<NumberGrower> MapSlide05Numbers;
+
+	public List<Image> MapSlide06Images;
+	public List<NumberGrower> MapSlide06Numbers;
+
+	public List<Image> MapSlide07Images;
+	public List<NumberGrower> MapSlide07Numbers;
+
+	public List<Image> MapSlide08Images;
+	public List<NumberGrower> MapSlide08Numbers;
+
 	public float Timeout = 1f;
 
 	private int _currentSlideIndex = 0;
 	private int _currentMapSlideIndex = 0;
 
-	private bool _mapSlideIsOpened;
+	private bool _mapSlideIsOpened = false;
 
 	void Start()
 	{
-		BackToMenu();
 	}
 
 	[RPC]
@@ -68,21 +88,32 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void BackToMenu()
 	{
+		if (_mapSlideIsOpened)
+		{
+			TweenMenuImages(0, 0.7f, 0, 0, 0);
+		}
+		else
+		{
+			TweenMenuImages(0, 0.7f, Timeout);
+		}
+
+		_mapSlideIsOpened = false;
+
 		CloseMapSlide();
-		TweenMenuImages(0, 0.7f, Timeout);
 		MoveCamera(0, Timeout * 2);
 	}
 
 	[RPC]
 	public void MoveToPointOnMap(int index)
 	{
+		_mapSlideIsOpened = true;
+
 		if (_currentMapSlideIndex == index)
 		{
 			return;
 		}
 
 		CloseMapSlide();
-
 		StartCoroutine(MoveCameraAndOpenMapSlide(index));
 	}
 
@@ -265,24 +296,31 @@ public class ApplicationHandler : MonoBehaviour
 				break;
 			case 2:
 				_currentMapSlideIndex = 2;
+				TweenMapSlide(MapSlide02Images, MapSlide02Numbers, 1, Timeout * 2, Ease.InOutQuart);
 				break;
 			case 3:
 				_currentMapSlideIndex = 3;
+				TweenMapSlide(MapSlide03Images, MapSlide03Numbers, 1, Timeout * 2, Ease.InOutQuart);
 				break;
 			case 4:
 				_currentMapSlideIndex = 4;
+				TweenMapSlide(MapSlide04Images, MapSlide04Numbers, 1, Timeout * 2, Ease.InOutQuart);
 				break;
 			case 5:
 				_currentMapSlideIndex = 5;
+				TweenMapSlide(MapSlide05Images, MapSlide05Numbers, 1, Timeout * 2, Ease.InOutQuart);
 				break;
 			case 6:
 				_currentMapSlideIndex = 6;
+				TweenMapSlide(MapSlide06Images, MapSlide06Numbers, 1, Timeout * 2, Ease.InOutQuart);
 				break;
 			case 7:
 				_currentMapSlideIndex = 7;
+				TweenMapSlide(MapSlide07Images, MapSlide07Numbers, 1, Timeout * 2, Ease.InOutQuart);
 				break;
 			case 8:
 				_currentMapSlideIndex = 8;
+				TweenMapSlide(MapSlide08Images, MapSlide08Numbers, 1, Timeout * 2, Ease.InOutQuart);
 				break;
 			default:
 				_currentMapSlideIndex = 0;
@@ -300,18 +338,25 @@ public class ApplicationHandler : MonoBehaviour
 				TweenMapSlide(MapSlide01Images, MapSlide01Numbers, 0, Timeout, Ease.OutQuart);
 				break;
 			case 2:
+				TweenMapSlide(MapSlide02Images, MapSlide02Numbers, 0, Timeout, Ease.OutQuart);
 				break;
 			case 3:
+				TweenMapSlide(MapSlide03Images, MapSlide03Numbers, 0, Timeout, Ease.OutQuart);
 				break;
 			case 4:
+				TweenMapSlide(MapSlide04Images, MapSlide04Numbers, 0, Timeout, Ease.OutQuart);
 				break;
 			case 5:
+				TweenMapSlide(MapSlide05Images, MapSlide05Numbers, 0, Timeout, Ease.OutQuart);
 				break;
 			case 6:
+				TweenMapSlide(MapSlide06Images, MapSlide06Numbers, 0, Timeout, Ease.OutQuart);
 				break;
 			case 7:
+				TweenMapSlide(MapSlide07Images, MapSlide07Numbers, 0, Timeout, Ease.OutQuart);
 				break;
 			case 8:
+				TweenMapSlide(MapSlide08Images, MapSlide08Numbers, 0, Timeout, Ease.OutQuart);
 				break;
 		}
 
@@ -444,9 +489,9 @@ public class ApplicationHandler : MonoBehaviour
 	private IEnumerator MoveCameraAndOpenMapSlide(int index)
 	{
 		yield return new WaitForSeconds(Timeout * 2 + 0.1f);
+		TweenMenuImages(0, 0.7f, 0, Timeout * 2 + 0.1f, 0);
 		MoveCamera(index, Timeout * 2 + 0.1f);
 		MoveCamera(0, 1, Timeout * 2 + 0.1f);
-		//TweenMenuImages(1, 1, 0, Timeout * 2 + 0.1f);
 		OpenMapSlide(index);
 	}
 
