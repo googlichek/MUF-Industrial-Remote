@@ -7,6 +7,8 @@ public class NumberGrower : MonoBehaviour
 
 	public bool IsFloat = false;
 	public bool IsPersent = false;
+	public bool StarSymbol = false;
+	public bool DoubleStarSymbol = false;
 
 	private Text _txt;
 
@@ -32,6 +34,16 @@ public class NumberGrower : MonoBehaviour
 		if (IsPersent)
 		{
 			_txt.text += "%";
+		}
+
+		if (StarSymbol)
+		{
+			_txt.text += "*";
+		}
+
+		if (DoubleStarSymbol)
+		{
+			_txt.text += "**";
 		}
 	}
 

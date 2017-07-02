@@ -17,6 +17,16 @@ public class ApplicationHandler : MonoBehaviour
 	public VideoPlayer Slide01VideoPlayer;
 	public List<NumberGrower> Slide01Numbers;
 
+	public List<Image> Slide02Images;
+	public RawImage Slide02VideoImage;
+	public VideoPlayer Slide02VideoPlayer;
+	public List<NumberGrower> Slide02Numbers;
+
+	public List<Image> Slide03Images;
+	public RawImage Slide03VideoImage;
+	public VideoPlayer Slide03VideoPlayer;
+	public List<NumberGrower> Slide03Numbers;
+
 	public float Timeout = 1f;
 
 	private int _currentSlideIndex = 0;
@@ -56,6 +66,8 @@ public class ApplicationHandler : MonoBehaviour
 			return;
 		}
 
+		CloseSlide();
+
 		if (index == 1)
 		{
 			_currentSlideIndex = 1;
@@ -67,7 +79,33 @@ public class ApplicationHandler : MonoBehaviour
 				Slide01Numbers,
 				1,
 				Timeout * 2,
-				Ease.InQuint);
+				Ease.InOutQuart);
+		}
+		else if (index == 2)
+		{
+			_currentSlideIndex = 2;
+
+			TweenSlide(
+				Slide02Images,
+				Slide02VideoImage,
+				Slide02VideoPlayer,
+				Slide02Numbers,
+				1,
+				Timeout * 2,
+				Ease.InOutQuart);
+		}
+		else if (index == 3)
+		{
+			_currentSlideIndex = 3;
+
+			TweenSlide(
+				Slide03Images,
+				Slide03VideoImage,
+				Slide03VideoPlayer,
+				Slide03Numbers,
+				1,
+				Timeout * 2,
+				Ease.InOutQuart);
 		}
 		else
 		{
@@ -91,10 +129,32 @@ public class ApplicationHandler : MonoBehaviour
 				Slide01Numbers,
 				0,
 				Timeout * 2,
-				Ease.OutQuint);
-
-			_currentSlideIndex = 0;
+				Ease.OutQuart);
 		}
+		else if (_currentSlideIndex == 2)
+		{
+			TweenSlide(
+				Slide02Images,
+				Slide02VideoImage,
+				Slide02VideoPlayer,
+				Slide02Numbers,
+				0,
+				Timeout * 2,
+				Ease.OutQuart);
+		}
+		else if (_currentSlideIndex == 3)
+		{
+			TweenSlide(
+				Slide03Images,
+				Slide03VideoImage,
+				Slide03VideoPlayer,
+				Slide03Numbers,
+				0,
+				Timeout * 2,
+				Ease.OutQuart);
+		}
+
+		_currentSlideIndex = 0;
 	}
 
 	private void TweenSlide(
@@ -165,7 +225,6 @@ public class ApplicationHandler : MonoBehaviour
 		{
 			image.DOKill();
 
-
 			if (image.CompareTag("MenuImage"))
 			{
 				image.DOFade(value, time).SetDelay(0.1f * i);
@@ -188,7 +247,7 @@ public class ApplicationHandler : MonoBehaviour
 
 	private IEnumerator DelayVideoRewind(VideoPlayer videoPlayer)
 	{
-		yield return new WaitForSeconds(Timeout * 2);
+		yield return new WaitForSeconds(Timeout * 1.5f);
 		videoPlayer.frame = 0;
 		videoPlayer.Stop();
 	}
