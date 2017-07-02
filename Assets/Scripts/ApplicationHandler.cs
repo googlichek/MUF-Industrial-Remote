@@ -27,6 +27,21 @@ public class ApplicationHandler : MonoBehaviour
 	public VideoPlayer Slide03VideoPlayer;
 	public List<NumberGrower> Slide03Numbers;
 
+	public List<Image> Slide04Images;
+	public RawImage Slide04VideoImage;
+	public VideoPlayer Slide04VideoPlayer;
+	public List<NumberGrower> Slide04Numbers;
+
+	public List<Image> Slide05Images;
+	public RawImage Slide05VideoImage;
+	public VideoPlayer Slide05VideoPlayer;
+	public List<NumberGrower> Slide05Numbers;
+
+	public List<Image> Slide06Images;
+	public RawImage Slide06VideoImage;
+	public VideoPlayer Slide06VideoPlayer;
+	public List<NumberGrower> Slide06Numbers;
+
 	public float Timeout = 1f;
 
 	private int _currentSlideIndex = 0;
@@ -68,48 +83,83 @@ public class ApplicationHandler : MonoBehaviour
 
 		CloseSlide();
 
-		if (index == 1)
+		switch (index)
 		{
-			_currentSlideIndex = 1;
+			case 1:
+				_currentSlideIndex = 1;
 
-			TweenSlide(
-				Slide01Images,
-				Slide01VideoImage,
-				Slide01VideoPlayer,
-				Slide01Numbers,
-				1,
-				Timeout * 2,
-				Ease.InOutQuart);
-		}
-		else if (index == 2)
-		{
-			_currentSlideIndex = 2;
+				TweenSlide(
+					Slide01Images,
+					Slide01VideoImage,
+					Slide01VideoPlayer,
+					Slide01Numbers,
+					1,
+					Timeout * 2,
+					Ease.InOutQuart);
+				break;
+			case 2:
+				_currentSlideIndex = 2;
 
-			TweenSlide(
-				Slide02Images,
-				Slide02VideoImage,
-				Slide02VideoPlayer,
-				Slide02Numbers,
-				1,
-				Timeout * 2,
-				Ease.InOutQuart);
-		}
-		else if (index == 3)
-		{
-			_currentSlideIndex = 3;
+				TweenSlide(
+					Slide02Images,
+					Slide02VideoImage,
+					Slide02VideoPlayer,
+					Slide02Numbers,
+					1,
+					Timeout * 2,
+					Ease.InOutQuart);
+				break;
+			case 3:
+				_currentSlideIndex = 3;
 
-			TweenSlide(
-				Slide03Images,
-				Slide03VideoImage,
-				Slide03VideoPlayer,
-				Slide03Numbers,
-				1,
-				Timeout * 2,
-				Ease.InOutQuart);
-		}
-		else
-		{
-			_currentSlideIndex = 0;
+				TweenSlide(
+					Slide03Images,
+					Slide03VideoImage,
+					Slide03VideoPlayer,
+					Slide03Numbers,
+					1,
+					Timeout * 2,
+					Ease.InOutQuart);
+				break;
+			case 4:
+				_currentSlideIndex = 4;
+
+				TweenSlide(
+					Slide04Images,
+					Slide04VideoImage,
+					Slide04VideoPlayer,
+					Slide04Numbers,
+					1,
+					Timeout * 2,
+					Ease.InOutQuart);
+				break;
+			case 5:
+				_currentSlideIndex = 5;
+
+				TweenSlide(
+					Slide05Images,
+					Slide05VideoImage,
+					Slide05VideoPlayer,
+					Slide05Numbers,
+					1,
+					Timeout * 2,
+					Ease.InOutQuart);
+				break;
+			case 6:
+				_currentSlideIndex = 6;
+
+				TweenSlide(
+					Slide06Images,
+					Slide06VideoImage,
+					Slide06VideoPlayer,
+					Slide06Numbers,
+					1,
+					Timeout * 2,
+					Ease.InOutQuart);
+				break;
+			default:
+				_currentSlideIndex = 0;
+				break;
 		}
 	}
 
@@ -149,6 +199,39 @@ public class ApplicationHandler : MonoBehaviour
 				Slide03VideoImage,
 				Slide03VideoPlayer,
 				Slide03Numbers,
+				0,
+				Timeout * 2,
+				Ease.OutQuart);
+		}
+		else if (_currentSlideIndex == 4)
+		{
+			TweenSlide(
+				Slide04Images,
+				Slide04VideoImage,
+				Slide04VideoPlayer,
+				Slide04Numbers,
+				0,
+				Timeout * 2,
+				Ease.OutQuart);
+		}
+		else if (_currentSlideIndex == 5)
+		{
+			TweenSlide(
+				Slide05Images,
+				Slide05VideoImage,
+				Slide05VideoPlayer,
+				Slide05Numbers,
+				0,
+				Timeout * 2,
+				Ease.OutQuart);
+		}
+		else if (_currentSlideIndex == 6)
+		{
+			TweenSlide(
+				Slide06Images,
+				Slide06VideoImage,
+				Slide06VideoPlayer,
+				Slide06Numbers,
 				0,
 				Timeout * 2,
 				Ease.OutQuart);
