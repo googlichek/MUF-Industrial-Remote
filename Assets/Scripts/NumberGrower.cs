@@ -6,6 +6,7 @@ public class NumberGrower : MonoBehaviour
 	public float To;
 
 	public bool IsFloat = false;
+	public bool IsFloatWithTwoZeros = false;
 	public bool IsPersent = false;
 	public bool StarSymbol = false;
 	public bool DoubleStarSymbol = false;
@@ -29,7 +30,18 @@ public class NumberGrower : MonoBehaviour
 		}
 
 
-		_txt.text = IsFloat ? (Mathf.Lerp(0, To, _lerp)).ToString("0.0") : ((int) Mathf.Lerp(0, To, _lerp)).ToString();
+		if (IsFloatWithTwoZeros)
+		{
+			_txt.text = (Mathf.Lerp(0, To, _lerp)).ToString("0.00");
+		}
+		else if (IsFloat)
+		{
+			_txt.text = (Mathf.Lerp(0, To, _lerp)).ToString("0.0");
+		}
+		else
+		{
+			_txt.text = ((int) Mathf.Lerp(0, To, _lerp)).ToString();
+		}
 
 		if (IsPersent)
 		{

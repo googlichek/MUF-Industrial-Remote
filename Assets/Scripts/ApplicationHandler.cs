@@ -12,6 +12,8 @@ public class ApplicationHandler : MonoBehaviour
 	public List<Image> MenuImages;
 	public List<Transform> CameraPositions;
 
+	public Image SlideBackground;
+
 	public List<Image> Slide01Images;
 	public RawImage Slide01VideoImage;
 	public VideoPlayer Slide01VideoPlayer;
@@ -75,12 +77,14 @@ public class ApplicationHandler : MonoBehaviour
 
 	void Start()
 	{
+		//BackToMenu();
 	}
 
 	[RPC]
 	public void OpenMap()
 	{
 		CloseSlide();
+		SlideBackground.DOFade(0, Timeout * 2).SetEase(Ease.OutBack);
 		TweenMenuImages(1, 1, Timeout);
 		MoveCamera(0, Timeout * 2);
 	}
@@ -88,14 +92,14 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void BackToMenu()
 	{
-		if (_mapSlideIsOpened)
-		{
-			TweenMenuImages(0, 0.7f, 0, 0, 0);
-		}
-		else
-		{
-			TweenMenuImages(0, 0.7f, Timeout);
-		}
+		//if (_mapSlideIsOpened)
+		//{
+		//	TweenMenuImages(0, 0.7f, 0, 0, 0);
+		//}
+		//else
+		//{
+		//	TweenMenuImages(0, 0.7f, Timeout);
+		//}
 
 		_mapSlideIsOpened = false;
 
@@ -127,6 +131,8 @@ public class ApplicationHandler : MonoBehaviour
 		{
 			return;
 		}
+
+		SlideBackground.DOFade(1, Timeout * 2).SetEase(Ease.InBack);
 
 		CloseSlide();
 
@@ -338,28 +344,28 @@ public class ApplicationHandler : MonoBehaviour
 			case 0:
 				return;
 			case 1:
-				TweenMapSlide(MapSlide01Images, MapSlide01Numbers, 0, Timeout, Ease.OutQuart);
+				TweenMapSlide(MapSlide01Images, MapSlide01Numbers, 0, Timeout * 3, Ease.OutBack, 0);
 				break;
 			case 2:
-				TweenMapSlide(MapSlide02Images, MapSlide02Numbers, 0, Timeout, Ease.OutQuart);
+				TweenMapSlide(MapSlide02Images, MapSlide02Numbers, 0, Timeout * 3, Ease.OutBack, 0);
 				break;
 			case 3:
-				TweenMapSlide(MapSlide03Images, MapSlide03Numbers, 0, Timeout, Ease.OutQuart);
+				TweenMapSlide(MapSlide03Images, MapSlide03Numbers, 0, Timeout * 3, Ease.OutBack, 0);
 				break;
 			case 4:
-				TweenMapSlide(MapSlide04Images, MapSlide04Numbers, 0, Timeout, Ease.OutQuart);
+				TweenMapSlide(MapSlide04Images, MapSlide04Numbers, 0, Timeout * 3, Ease.OutBack, 0);
 				break;
 			case 5:
-				TweenMapSlide(MapSlide05Images, MapSlide05Numbers, 0, Timeout, Ease.OutQuart);
+				TweenMapSlide(MapSlide05Images, MapSlide05Numbers, 0, Timeout * 3, Ease.OutBack, 0);
 				break;
 			case 6:
-				TweenMapSlide(MapSlide06Images, MapSlide06Numbers, 0, Timeout, Ease.OutQuart);
+				TweenMapSlide(MapSlide06Images, MapSlide06Numbers, 0, Timeout * 3, Ease.OutBack, 0);
 				break;
 			case 7:
-				TweenMapSlide(MapSlide07Images, MapSlide07Numbers, 0, Timeout, Ease.OutQuart);
+				TweenMapSlide(MapSlide07Images, MapSlide07Numbers, 0, Timeout * 3, Ease.OutBack, 0);
 				break;
 			case 8:
-				TweenMapSlide(MapSlide08Images, MapSlide08Numbers, 0, Timeout, Ease.OutQuart);
+				TweenMapSlide(MapSlide08Images, MapSlide08Numbers, 0, Timeout * 3, Ease.OutBack, 0);
 				break;
 		}
 
@@ -373,19 +379,20 @@ public class ApplicationHandler : MonoBehaviour
 		List<NumberGrower> numbers,
 		float value,
 		float time,
-		Ease ease)
+		Ease ease,
+		float delay = 0.1f)
 	{
 		int i = 0;
 
 		foreach (Image image in slideImages)
 		{
 			image.DOKill();
-			image.DOFade(value, time).SetEase(ease).SetDelay(0.1f * i);
+			image.DOFade(value, time).SetEase(ease).SetDelay(delay * i);
 			i++;
 		}
 
 		slideVideo.DOKill();
-		slideVideo.DOFade(value, time).SetEase(ease).SetDelay(0.1f * i);
+		slideVideo.DOFade(value, time).SetEase(ease).SetDelay(delay * i);
 		i++;
 
 		if (value > 0)
@@ -405,12 +412,12 @@ public class ApplicationHandler : MonoBehaviour
 			if (value > 0)
 			{
 				number.Reset();
-				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(0.1f * i);
+				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay * i);
 				number.Animate();
 			}
 			else
 			{
-				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(0.05f * i);
+				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay / 2 * i);
 			}
 			
 			i++;
@@ -422,14 +429,15 @@ public class ApplicationHandler : MonoBehaviour
 		List<NumberGrower> numbers,
 		float value,
 		float time,
-		Ease ease)
+		Ease ease,
+		float delay = 0.1f)
 	{
 		int i = 0;
 
 		foreach (Image image in mapSlideImages)
 		{
 			image.DOKill();
-			image.DOFade(value, time).SetEase(ease).SetDelay(0.1f * i);
+			image.DOFade(value, time).SetEase(ease).SetDelay(delay * i);
 			i++;
 		}
 
@@ -440,12 +448,12 @@ public class ApplicationHandler : MonoBehaviour
 			if (value > 0)
 			{
 				number.Reset();
-				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(0.1f * i);
+				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay * i);
 				number.Animate();
 			}
 			else
 			{
-				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(0.05f * i);
+				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay  / 2 * i);
 			}
 			
 			i++;
@@ -492,7 +500,7 @@ public class ApplicationHandler : MonoBehaviour
 	private IEnumerator MoveCameraAndOpenMapSlide(int index, float time = 0)
 	{
 		yield return new WaitForSeconds(time + Timeout * 2 + 0.1f);
-		TweenMenuImages(0, 0.7f, 0, Timeout * 2 + 0.1f, 0);
+		//TweenMenuImages(0, 0.7f, 0, Timeout * 2 + 0.1f, 0);
 		MoveCamera(index, Timeout * 2 + 0.1f);
 		MoveCamera(0, 1, Timeout * 2 + 0.1f);
 		OpenMapSlide(index);
