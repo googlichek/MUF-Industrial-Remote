@@ -77,7 +77,7 @@ public class ApplicationHandler : MonoBehaviour
 
 	void Start()
 	{
-		//BackToMenu();
+		BackToMenu();
 	}
 
 	[RPC]
@@ -85,22 +85,13 @@ public class ApplicationHandler : MonoBehaviour
 	{
 		CloseSlide();
 		SlideBackground.DOFade(0, Timeout * 2).SetEase(Ease.OutBack);
-		TweenMenuImages(1, 1, Timeout);
+		TweenMenuImages(1, 1, Timeout, Timeout * 1.5f);
 		MoveCamera(0, Timeout * 2);
 	}
 
 	[RPC]
 	public void BackToMenu()
 	{
-		//if (_mapSlideIsOpened)
-		//{
-		//	TweenMenuImages(0, 0.7f, 0, 0, 0);
-		//}
-		//else
-		//{
-		//	TweenMenuImages(0, 0.7f, Timeout);
-		//}
-
 		_mapSlideIsOpened = false;
 
 		CloseMapSlide();
@@ -127,6 +118,8 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void OpenSlide(int index)
 	{
+		TweenMenuImages(0, 0.7f, 0.5f * Timeout, 0, 0.05f);
+
 		if (_currentSlideIndex == index)
 		{
 			return;
@@ -482,12 +475,7 @@ public class ApplicationHandler : MonoBehaviour
 		{
 			image.DOKill();
 
-			if (image.CompareTag("MenuImage"))
-			{
-				image.DOFade(value, time).SetDelay(delay + subDelay * i);
-				image.transform.DOScale(notFullScale, time).SetDelay(delay + subDelay * i);
-			}
-			else if (image.CompareTag("MenuFillImage"))
+			if (image.CompareTag("MenuFillImage"))
 			{
 				image.DOFade(value, time).SetDelay(delay + subDelay * i);
 				image.DOFillAmount(value, time).SetDelay(delay + subDelay * i);
@@ -514,7 +502,7 @@ public class ApplicationHandler : MonoBehaviour
 	private IEnumerator DelayVideoRewind(VideoPlayer videoPlayer)
 	{
 		yield return new WaitForSeconds(Timeout * 1.5f);
+		videoPlayer.Pause();
 		videoPlayer.frame = 0;
-		videoPlayer.Stop();
 	}
 }

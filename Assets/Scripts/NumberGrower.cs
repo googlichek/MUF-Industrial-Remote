@@ -26,7 +26,7 @@ public class NumberGrower : MonoBehaviour
 	{
 		if (_animate && _lerp < 1)
 		{
-			_lerp += (Time.deltaTime*0.33f);
+			_lerp += (Time.deltaTime * 0.28f);
 		}
 
 
