@@ -35,6 +35,8 @@ public class RemoteHandler : MonoBehaviour
 	public float Timeout = 1f;
 	public float BaseDelay = 0.2f;
 
+	private bool _hiddenButtonShouldNotWork = false;
+
 	void Start()
 	{
 		TweenMenuElements(
@@ -48,6 +50,8 @@ public class RemoteHandler : MonoBehaviour
 	[RPC]
 	public void OpenMap()
 	{
+		_hiddenButtonShouldNotWork = true;
+
 		TweenMenuElements(
 			MapButtonStartPositionX,
 			ButtonsStartPositionY,
@@ -83,6 +87,13 @@ public class RemoteHandler : MonoBehaviour
 
 	public void ShowHiddenButtons()
 	{
+		if (_hiddenButtonShouldNotWork)
+		{
+			return;
+		}
+
+		_hiddenButtonShouldNotWork = true;
+
 		TweenMenuElements(
 			MapButtonStartPositionX,
 			ButtonsStartPositionY,
@@ -101,6 +112,8 @@ public class RemoteHandler : MonoBehaviour
 
 	public void HideHiddenButtons()
 	{
+		_hiddenButtonShouldNotWork = false;
+
 		int i = 0;
 
 		HiddenBackToMenuButton.DOKill();
