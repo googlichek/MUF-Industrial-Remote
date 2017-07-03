@@ -12,6 +12,8 @@ public class ApplicationHandler : MonoBehaviour
 	public List<Image> MenuImages;
 	public List<Transform> CameraPositions;
 
+	public List<Image> HighlightedNumbers;
+
 	public Image SlideBackground;
 
 	public List<Image> Slide01Images;
@@ -113,6 +115,12 @@ public class ApplicationHandler : MonoBehaviour
 
 
 		_mapSlideIsOpened = true;
+	}
+
+	[RPC]
+	public void OpenHiddenSlide(int index)
+	{
+		
 	}
 
 	[RPC]
@@ -460,11 +468,11 @@ public class ApplicationHandler : MonoBehaviour
 			MainCamera.DOKill();
 		}
 
-		MainCamera.transform.DOMove(CameraPositions[index].transform.position, time).SetEase(Ease.OutFlash).SetDelay(delay);
+		MainCamera.transform.DOMove(CameraPositions[index].transform.position, time).SetEase(Ease.OutQuart).SetDelay(delay);
 
 		if (index == 0)
 		{
-			MainCamera.transform.DORotate(CameraPositions[index].transform.eulerAngles, time).SetEase(Ease.OutFlash).SetDelay(delay);
+			MainCamera.transform.DORotate(CameraPositions[index].transform.eulerAngles, time).SetEase(Ease.OutQuart).SetDelay(delay);
 		}
 	}
 

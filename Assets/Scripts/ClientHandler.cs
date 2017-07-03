@@ -143,6 +143,12 @@ public class ClientHandler : MonoBehaviour
 	}
 
 	[RPC]
+	public void OpenHiddenSlide(int index)
+	{
+		GetComponent<NetworkView>().RPC("OpenHiddenSlide", RPCMode.Server, index);
+	}
+
+	[RPC]
 	void SendInfoToServer()
 	{
 		string someInfo = "Client " + _myNetworkPlayer.guid + ": connected to server";

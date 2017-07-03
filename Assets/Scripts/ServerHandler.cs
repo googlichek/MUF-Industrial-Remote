@@ -84,6 +84,12 @@ public class ServerHandler : MonoBehaviour
 	}
 
 	[RPC]
+	public void OpenHiddenSlide(int index)
+	{
+		_appHandler.OpenHiddenSlide(index);
+	}
+
+	[RPC]
 	void ReceiveInfoFromClient(string someInfo)
 	{
 		Debug.Log(someInfo + "\n");

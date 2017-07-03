@@ -7,20 +7,27 @@ public class RemoteHandler : MonoBehaviour
 {
 	public Button MapButton;
 	public Button BackToMenuButton;
+	public Button HiddenBackToMenuButton;
 	public List<Button> TopRowMenuButtons;
 	public List<Button> BottomRowMenuButtons;
 
 	public List<Button> TopRowInvestButtons;
 	public List<Button> BottomRowInvestButtons;
+	public List<Button> HiddenButtons;
 
 	public List<Image> MenuImages; 
-	public List<Image> InvestImages; 
+	public List<Image> InvestImages;
+
+	public List<Image> HighlightedNumbers;
 
 	public float MapButtonStartPositionX;
 	public float MapButtonEndPositionX;
 
 	public float ButtonsStartPositionY;
 	public float ButtonsEndPositionY;
+
+	public float HiddenButtonsStartPositionY;
+	public float HiddenButtonsEndPositionY;
 
 	public float BackToMenuButtonStartPositionY;
 	public float BackToMenuButtonEndPositionY;
@@ -72,6 +79,44 @@ public class RemoteHandler : MonoBehaviour
 			Timeout,
 			2f * Timeout,
 			Ease.OutBack);
+	}
+
+	public void ShowHiddenButtons()
+	{
+		TweenMenuElements(
+			MapButtonStartPositionX,
+			ButtonsStartPositionY,
+			Timeout,
+			0f,
+			Ease.InBack);
+
+		int i = TweenListOfImages(MenuImages, 0, Timeout, 0, Ease.OutBack, 0);
+
+		TweenListOfButtons(HiddenButtons, HiddenButtonsEndPositionY, Timeout, 2 * Timeout, Ease.OutBack, i);
+
+		HiddenBackToMenuButton.DOKill();
+		HiddenBackToMenuButton.transform.DOLocalMoveY(
+			BackToMenuButtonEndPositionY, Timeout).SetEase(Ease.OutBack).SetDelay(2 * Timeout + BaseDelay * i);
+	}
+
+	public void HideHiddenButtons()
+	{
+		int i = 0;
+
+		HiddenBackToMenuButton.DOKill();
+		HiddenBackToMenuButton.transform.DOLocalMoveY(
+			BackToMenuButtonStartPositionY, Timeout).SetEase(Ease.InBack).SetDelay(BaseDelay * i);
+
+		i = TweenListOfButtons(HiddenButtons, HiddenButtonsStartPositionY, Timeout, Timeout, Ease.InBack, i);
+
+		TweenMenuElements(
+			MapButtonEndPositionX,
+			ButtonsEndPositionY,
+			Timeout,
+			2 * Timeout,
+			Ease.OutBack);
+
+		TweenListOfImages(MenuImages, 1, Timeout, Timeout, Ease.InBack, i);
 	}
 
 	private void TweenMenuElements(
