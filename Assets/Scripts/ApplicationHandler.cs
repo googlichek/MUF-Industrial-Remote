@@ -467,7 +467,12 @@ public class ApplicationHandler : MonoBehaviour
 			MainCamera.DOKill();
 		}
 
-		MainCamera.transform.DOMove(CameraPositions[index].transform.position, time).SetEase(Ease.InOutQuad).SetDelay(delay);
+		MainCamera.transform.DOMove(CameraPositions[index].transform.position, time).SetEase(Ease.OutFlash).SetDelay(delay);
+
+		if (index == 0)
+		{
+			MainCamera.transform.DORotate(CameraPositions[index].transform.eulerAngles, time).SetEase(Ease.OutFlash).SetDelay(delay);
+		}
 	}
 
 	private void TweenMenuImages(float value, float notFullScale, float time, float delay = 0f, float subDelay = 0.1f)
