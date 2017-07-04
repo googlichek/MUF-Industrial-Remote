@@ -120,7 +120,40 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void OpenHiddenSlide(int index)
 	{
-		
+		List<Image> images = gameObject.GetComponent<ImageLoader>().Images;
+
+		if (index == 0)
+		{
+			SlideBackground.DOFade(0, Timeout * 2).SetEase(Ease.OutBack);
+
+			foreach (Image image in images)
+			{
+				image.DOKill();
+				image.DOFade(0, Timeout * 2).SetEase(Ease.OutBack);
+				image.DOFillAmount(0, Timeout * 2).SetEase(Ease.OutBack);
+			}
+		}
+		else
+		{
+			SlideBackground.DOFade(1, Timeout * 2).SetEase(Ease.InBack);
+
+			foreach (Image image in images)
+			{
+				image.DOKill();
+
+				if (images.IndexOf(image) == index - 1)
+				{
+					image.DOFade(1, Timeout * 2).SetEase(Ease.InBack);
+					image.DOFillAmount(1, Timeout * 2).SetEase(Ease.InBack);
+				}
+				else
+				{
+					image.DOFade(0, Timeout * 2).SetEase(Ease.OutBack);
+					image.DOFillAmount(0, Timeout * 2).SetEase(Ease.OutBack);
+				}
+			}
+			
+		}
 	}
 
 	[RPC]

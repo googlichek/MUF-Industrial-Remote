@@ -84,7 +84,7 @@ public class ServerHandler : MonoBehaviour
 	}
 
 	[RPC]
-	public void OpenHiddenSlide(int index)
+	void OpenHiddenSlide(int index)
 	{
 		_appHandler.OpenHiddenSlide(index);
 	}

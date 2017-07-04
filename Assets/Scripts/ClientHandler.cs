@@ -145,6 +145,11 @@ public class ClientHandler : MonoBehaviour
 	[RPC]
 	public void OpenHiddenSlide(int index)
 	{
+		if (index == 0)
+		{
+			_remoteHandler.HideHiddenButtons();
+		}
+
 		GetComponent<NetworkView>().RPC("OpenHiddenSlide", RPCMode.Server, index);
 	}
 
