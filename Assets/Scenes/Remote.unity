@@ -3441,7 +3441,7 @@ GameObject:
   - component: {fileID: 920228640}
   - component: {fileID: 920228639}
   m_Layer: 5
-  m_Name: Stand By
+  m_Name: Stand By Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3462,7 +3462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: 425.00012}
+  m_AnchoredPosition: {x: 775, y: 425.00012}
   m_SizeDelta: {x: 181, y: 79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920228639
@@ -3505,8 +3505,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1828359640}
-        m_MethodName: 
+      - m_Target: {fileID: 1828359638}
+        m_MethodName: LaunchStandBy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

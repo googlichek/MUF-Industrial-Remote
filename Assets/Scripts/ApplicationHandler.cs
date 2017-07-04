@@ -14,6 +14,9 @@ public class ApplicationHandler : MonoBehaviour
 
 	public List<Image> HighlightedNumbers;
 
+	public RawImage StandByVideoImage;
+	public VideoPlayer StandByVideoPlayer;
+
 	public Image SlideBackground;
 
 	public List<Image> Slide01Images;
@@ -79,12 +82,13 @@ public class ApplicationHandler : MonoBehaviour
 
 	void Start()
 	{
-		BackToMenu();
+		TweenStandByVideo(true);
 	}
 
 	[RPC]
 	public void OpenMap()
 	{
+		TweenStandByVideo(false);
 		CloseSlide();
 		SlideBackground.DOFade(0, Timeout * 2).SetEase(Ease.OutBack);
 		TweenMenuImages(1, 1, Timeout, Timeout * 1.5f);
@@ -94,6 +98,7 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void BackToMenu()
 	{
+		TweenStandByVideo(false);
 		_mapSlideIsOpened = false;
 
 		CloseMapSlide();
@@ -108,6 +113,7 @@ public class ApplicationHandler : MonoBehaviour
 			return;
 		}
 
+		TweenStandByVideo(false);
 		CloseMapSlide();
 
 		StartCoroutine(
@@ -121,12 +127,13 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void LaunchStandBy()
 	{
-		
+		TweenStandByVideo(true);
 	}
 
 	[RPC]
 	public void OpenHiddenSlide(int index)
 	{
+		TweenStandByVideo(false);
 		CloseSlide();
 
 		List<Image> images = gameObject.GetComponent<ImageLoader>().Images;
@@ -170,6 +177,7 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void OpenSlide(int index)
 	{
+		TweenStandByVideo(false);
 		TweenMenuImages(0, 0.7f, 0.5f * Timeout, 0, 0.05f);
 
 		if (_currentSlideIndex == index)
@@ -334,7 +342,6 @@ public class ApplicationHandler : MonoBehaviour
 
 	private void OpenMapSlide(int index)
 	{
-
 		if (_currentMapSlideIndex == index)
 		{
 			return;
@@ -425,6 +432,20 @@ public class ApplicationHandler : MonoBehaviour
 		}
 
 		_currentMapSlideIndex = 0;
+	}
+
+	private void TweenStandByVideo(bool visible)
+	{
+		if (visible)
+		{
+			StandByVideoImage.DOFade(1, Timeout * 3).SetEase(Ease.OutBack);
+			StandByVideoPlayer.Play();
+		}
+		else
+		{
+			StandByVideoImage.DOFade(0, Timeout * 0.5f).SetEase(Ease.InBack);
+			StartCoroutine(DelayVideoRewind(StandByVideoPlayer));
+		}
 	}
 
 	private void TweenSlide(
