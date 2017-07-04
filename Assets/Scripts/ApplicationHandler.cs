@@ -111,7 +111,8 @@ public class ApplicationHandler : MonoBehaviour
 		CloseMapSlide();
 
 		StartCoroutine(
-			!_mapSlideIsOpened ? MoveCameraAndOpenMapSlide(index, -2 * Timeout) : MoveCameraAndOpenMapSlide(index));
+			!_mapSlideIsOpened ?
+			MoveCameraAndOpenMapSlide(index, -2 * Timeout) : MoveCameraAndOpenMapSlide(index));
 
 
 		_mapSlideIsOpened = true;
@@ -126,6 +127,8 @@ public class ApplicationHandler : MonoBehaviour
 
 		if (index == 0)
 		{
+			TweenMenuImages(1, 1, Timeout, Timeout * 1.5f);
+
 			SlideBackground.DOFade(0, Timeout * 2).SetEase(Ease.OutBack);
 
 			foreach (Image image in images)
@@ -371,6 +374,11 @@ public class ApplicationHandler : MonoBehaviour
 				_currentMapSlideIndex = 0;
 				break;
 		}
+
+		if (_currentMapSlideIndex > 0)
+		{
+			HighlightedNumbers[_currentMapSlideIndex - 1].DOFade(1, Timeout * 2).SetEase(Ease.OutBack);
+		}
 	}
 
 	private void CloseMapSlide()
@@ -403,6 +411,11 @@ public class ApplicationHandler : MonoBehaviour
 			case 8:
 				TweenMapSlide(MapSlide08Images, MapSlide08Numbers, 0, Timeout * 3, Ease.OutBack, 0);
 				break;
+		}
+
+		if (_currentMapSlideIndex > 0)
+		{
+			HighlightedNumbers[_currentMapSlideIndex - 1].DOFade(0, Timeout * 2 + 0.1f).SetEase(Ease.InBack);
 		}
 
 		_currentMapSlideIndex = 0;
