@@ -1,4 +1,4 @@
-﻿Shader "UI/Tile Move"
+﻿Shader "UI/Multiply"
 {
 	Properties
 	{
@@ -12,8 +12,6 @@
 		_StencilReadMask("Stencil Read Mask", Float) = 255
 
 		_ColorMask("Color Mask", Float) = 15
-
-		_Dir("Move Speed", Float) = 0
 
 		[Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip("Use Alpha Clip", Float) = 0
 	}
@@ -42,7 +40,7 @@
 		Lighting Off
 		ZWrite Off
 		ZTest[unity_GUIZTestMode]
-		Blend SrcAlpha OneMinusSrcAlpha
+		Blend DstColor Zero
 		ColorMask[_ColorMask]
 
 		Pass
@@ -78,7 +76,6 @@
 			fixed4 _Color;
 			fixed4 _TextureSampleAdd;
 			float4 _ClipRect;
-			float _Dir;
 
 			v2f vert(appdata_t IN)
 			{
@@ -98,9 +95,11 @@
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
-				half4 color = (tex2D(_MainTex, IN.texcoord+float2(_Time.y*_Dir,0)) + _TextureSampleAdd) * IN.color;
+				half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
 
 				color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
+
+				color.rgb = lerp(float3(1, 1, 1), color.rgb, color.a);
 
 				#ifdef UNITY_UI_ALPHACLIP
 					clip(color.a - 0.001);
