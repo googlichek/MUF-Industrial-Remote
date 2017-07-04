@@ -7775,6 +7775,9 @@ MonoBehaviour:
   - {fileID: 331477942}
   - {fileID: 1637379383}
   Timeout: 1
+  Timer: 0
+  LastActionTime: 0
+  StandByTimeout: 360
 --- !u!114 &492370349
 MonoBehaviour:
   m_ObjectHideFlags: 0

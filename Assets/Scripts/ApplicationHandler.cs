@@ -75,14 +75,29 @@ public class ApplicationHandler : MonoBehaviour
 
 	public float Timeout = 1f;
 
+	public int Timer;
+	public int LastActionTime = 0;
+	public int StandByTimeout = 10;
+
 	private int _currentSlideIndex = 0;
 	private int _currentMapSlideIndex = 0;
 
 	private bool _mapSlideIsOpened = false;
+	private bool _inStandBy = false;
 
 	void Start()
 	{
-		TweenStandByVideo(true);
+	}
+
+	void Update()
+	{
+		Timer = Mathf.RoundToInt(Time.time);
+
+		if (Timer - LastActionTime == StandByTimeout && !_inStandBy)
+		{
+			BackToMenu();
+			TweenStandByVideo(true);
+		}
 	}
 
 	[RPC]
@@ -98,7 +113,7 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void BackToMenu()
 	{
-		TweenStandByVideo(false);
+		//TweenStandByVideo(false);
 		_mapSlideIsOpened = false;
 
 		CloseMapSlide();
@@ -434,15 +449,19 @@ public class ApplicationHandler : MonoBehaviour
 		_currentMapSlideIndex = 0;
 	}
 
-	private void TweenStandByVideo(bool visible)
+	private void TweenStandByVideo(bool visible, float delay = 0)
 	{
 		if (visible)
 		{
-			StandByVideoImage.DOFade(1, Timeout * 3).SetEase(Ease.OutBack);
+			_inStandBy = true;
+			StandByVideoImage.DOFade(1, Timeout * 3).SetEase(Ease.OutBack).SetDelay(delay);
 			StandByVideoPlayer.Play();
 		}
 		else
 		{
+			LastActionTime = Mathf.RoundToInt(Time.time);
+
+			_inStandBy = false;
 			StandByVideoImage.DOFade(0, Timeout * 0.5f).SetEase(Ease.InBack);
 			StartCoroutine(DelayVideoRewind(StandByVideoPlayer));
 		}
