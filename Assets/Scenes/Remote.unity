@@ -857,6 +857,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1834717518}
   - {fileID: 262587965}
   - {fileID: 2045369873}
   - {fileID: 2146138607}
@@ -1144,10 +1145,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 4740f7db24b4e504993327e1e25e7ab1,
+    m_HighlightedSprite: {fileID: 21300000, guid: f9b3b9419629de645bdff9e4ca14480a,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 4740f7db24b4e504993327e1e25e7ab1, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 4740f7db24b4e504993327e1e25e7ab1, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: f9b3b9419629de645bdff9e4ca14480a, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: f9b3b9419629de645bdff9e4ca14480a, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1190,7 +1191,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 70709a26953e8cb428890d88ef5289a1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae2c4f6411cd4fb4cbed7393f536c7cb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1553,7 +1554,7 @@ RectTransform:
   m_Children:
   - {fileID: 1091227074}
   m_Father: {fileID: 195611548}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1576,7 +1577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &272970150
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4107,7 +4108,7 @@ RectTransform:
   - {fileID: 675200694}
   - {fileID: 1334683259}
   m_Father: {fileID: 195611548}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4364,7 +4365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1091227074
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4526,7 +4527,7 @@ RectTransform:
   - {fileID: 1673879071}
   - {fileID: 758091210}
   m_Father: {fileID: 195611548}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6832,6 +6833,66 @@ NetworkView:
   m_ViewID:
     m_ID: 1
     m_Type: 1
+--- !u!1 &1834717517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1834717518}
+  - component: {fileID: 1834717519}
+  m_Layer: 5
+  m_Name: Video Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1834717518
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1834717517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 195611548}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!328 &1834717519
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1834717517}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: c91f789dfde3b034593da32a842d0fd7, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera: {fileID: 1147288996}
+  m_TargetTexture: {fileID: 0}
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: _MainTex
+  m_RenderMode: 0
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 0
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 00
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 1
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
 --- !u!1 &1899408842
 GameObject:
   m_ObjectHideFlags: 0
@@ -7503,7 +7564,7 @@ RectTransform:
   - {fileID: 894082901}
   - {fileID: 127688079}
   m_Father: {fileID: 195611548}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7722,10 +7783,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 4740f7db24b4e504993327e1e25e7ab1,
+    m_HighlightedSprite: {fileID: 21300000, guid: ed003af8a50019540af6a4fcfffbcfca,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 4740f7db24b4e504993327e1e25e7ab1, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 4740f7db24b4e504993327e1e25e7ab1, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: ed003af8a50019540af6a4fcfffbcfca, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: ed003af8a50019540af6a4fcfffbcfca, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -7768,7 +7829,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 70709a26953e8cb428890d88ef5289a1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f33dfd1443f68f14288cfea108d5697e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7818,7 +7879,7 @@ RectTransform:
   - {fileID: 1403951571}
   - {fileID: 243994943}
   m_Father: {fileID: 195611548}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
