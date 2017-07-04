@@ -90,6 +90,12 @@ public class ServerHandler : MonoBehaviour
 	}
 
 	[RPC]
+	void LaunchStandBy()
+	{
+		_appHandler.LaunchStandBy();
+	}
+
+	[RPC]
 	void ReceiveInfoFromClient(string someInfo)
 	{
 		Debug.Log(someInfo + "\n");

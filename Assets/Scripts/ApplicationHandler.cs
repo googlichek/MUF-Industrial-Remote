@@ -119,6 +119,12 @@ public class ApplicationHandler : MonoBehaviour
 	}
 
 	[RPC]
+	public void LaunchStandBy()
+	{
+		
+	}
+
+	[RPC]
 	public void OpenHiddenSlide(int index)
 	{
 		CloseSlide();

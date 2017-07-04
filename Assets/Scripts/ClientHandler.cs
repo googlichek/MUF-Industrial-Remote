@@ -154,6 +154,12 @@ public class ClientHandler : MonoBehaviour
 	}
 
 	[RPC]
+	public void LaunchStandBy()
+	{
+		GetComponent<NetworkView>().RPC("LaunchStandBy", RPCMode.Server);
+	}
+
+	[RPC]
 	void SendInfoToServer()
 	{
 		string someInfo = "Client " + _myNetworkPlayer.guid + ": connected to server";
