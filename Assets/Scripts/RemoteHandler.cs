@@ -70,6 +70,8 @@ public class RemoteHandler : MonoBehaviour
 	[RPC]
 	public void BackToMenu()
 	{
+		_hiddenButtonShouldNotWork = false;
+
 		TweenInvestProjectElements(
 			BackToMenuButtonStartPositionY,
 			ButtonsStartPositionY,

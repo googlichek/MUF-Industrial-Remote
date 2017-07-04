@@ -120,6 +120,8 @@ public class ApplicationHandler : MonoBehaviour
 	[RPC]
 	public void OpenHiddenSlide(int index)
 	{
+		CloseSlide();
+
 		List<Image> images = gameObject.GetComponent<ImageLoader>().Images;
 
 		if (index == 0)
@@ -129,8 +131,8 @@ public class ApplicationHandler : MonoBehaviour
 			foreach (Image image in images)
 			{
 				image.DOKill();
-				image.DOFade(0, Timeout * 2).SetEase(Ease.OutBack);
-				image.DOFillAmount(0, Timeout * 2).SetEase(Ease.OutBack);
+				image.DOFade(0, Timeout * 2).SetEase(Ease.OutBack).SetDelay(Timeout);
+				image.DOFillAmount(0, Timeout * 2).SetEase(Ease.OutBack).SetDelay(Timeout);
 			}
 		}
 		else
@@ -143,13 +145,13 @@ public class ApplicationHandler : MonoBehaviour
 
 				if (images.IndexOf(image) == index - 1)
 				{
-					image.DOFade(1, Timeout * 2).SetEase(Ease.InBack);
-					image.DOFillAmount(1, Timeout * 2).SetEase(Ease.InBack);
+					image.DOFade(1, Timeout * 2).SetEase(Ease.InBack).SetDelay(Timeout);
+					image.DOFillAmount(1, Timeout * 2).SetEase(Ease.InBack).SetDelay(Timeout);
 				}
 				else
 				{
-					image.DOFade(0, Timeout * 2).SetEase(Ease.OutBack);
-					image.DOFillAmount(0, Timeout * 2).SetEase(Ease.OutBack);
+					image.DOFade(0, Timeout * 2).SetEase(Ease.OutBack).SetDelay(Timeout);
+					image.DOFillAmount(0, Timeout * 2).SetEase(Ease.OutBack).SetDelay(Timeout);
 				}
 			}
 			
