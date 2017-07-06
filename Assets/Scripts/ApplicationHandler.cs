@@ -507,12 +507,12 @@ public class ApplicationHandler : MonoBehaviour
 			if (value > 0)
 			{
 				number.Reset();
-				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay * i);
+				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay * i * 0);
 				number.Animate();
 			}
 			else
 			{
-				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay / 2 * i);
+				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay / 2 * i * 0);
 			}
 			
 			i++;
@@ -543,12 +543,12 @@ public class ApplicationHandler : MonoBehaviour
 			if (value > 0)
 			{
 				number.Reset();
-				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay * i);
+				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay * i * 0);
 				number.Animate();
 			}
 			else
 			{
-				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay  / 2 * i);
+				number.GetComponent<Text>().DOFade(value, time).SetEase(ease).SetDelay(delay  / 2 * i * 0);
 			}
 			
 			i++;
@@ -597,7 +597,7 @@ public class ApplicationHandler : MonoBehaviour
 		yield return new WaitForSeconds(time + Timeout * 2 + 0.1f);
 		//TweenMenuImages(0, 0.7f, 0, Timeout * 2 + 0.1f, 0);
 		MoveCamera(index, Timeout * 2 + 0.1f);
-		MoveCamera(0, 1, Timeout * 2 + 0.1f);
+		MoveCamera(0, 0.5f, Timeout * 2 + 0.1f);
 		OpenMapSlide(index);
 	}
 
